@@ -8,9 +8,13 @@
     <link rel="stylesheet" href="css/styles.css">
     <script src="https://cdn.tailwindcss.com"></script>
     <script src="https://unpkg.com/lucide@latest"></script>
+    <script src="js/particle-network.js" defer></script>
     <script src="js/scripts.js" defer></script>
 </head>
-<body class="bg-slate-900 text-white min-h-screen flex flex-col font-['Inter'] transition-colors duration-300">
+<body class="text-white min-h-screen flex flex-col font-['Inter'] transition-colors duration-300 overflow-x-hidden">
+    
+    <!-- Particle Network Background -->
+    <canvas id="particleNetwork" class="particle-network-canvas"></canvas>
     
     <div class="absolute top-8 right-8 z-10">
         <button id="themeToggle" class="hidden">
@@ -22,91 +26,157 @@
 
     <main class="flex-grow flex flex-col">
         <!-- Hero Section -->
-        <section class="flex items-center justify-center min-h-screen">
-            <div class="text-center max-w-4xl mx-auto px-4">
-                <h1 class="text-4xl md:text-6xl lg:text-7xl font-black mb-2 tracking-tighter leading-none text-shadow-glow-subtle">
-                    Jan Beyati <span class="font-normal"></span>
+        <section class="flex items-center justify-center min-h-screen relative">
+            <div class="text-center max-w-5xl mx-auto px-4 relative z-10">
+                <div class="hero-content">
+                    <div class="inline-block mb-6">
+                        <span class="greeting-badge">Hey There!</span>
+                    </div>
+                    <h1 class="text-5xl md:text-7xl lg:text-8xl font-black mb-4 tracking-tighter leading-none hero-title">
+                        Jan <span class="text-[#a8ff00]">Beyati</span>
                 </h1>
-                <p class="text-xl md:text-2xl font-semibold mb-8">
-                    <span class="text-[#a8ff00]">Software Engineer</span>
+                    <div class="flex items-center justify-center gap-3 mb-6">
+                        <div class="h-px w-16 bg-gradient-to-r from-transparent to-[#a8ff00]"></div>
+                        <p class="text-2xl md:text-3xl lg:text-4xl font-semibold text-[#a8ff00] hero-subtitle">
+                            Software Engineer
+                        </p>
+                        <div class="h-px w-16 bg-gradient-to-l from-transparent to-[#a8ff00]"></div>
+                    </div>
+                    <p class="text-lg md:text-xl text-gray-400 mb-12 max-w-2xl mx-auto hero-description">
+                        Crafting elegant solutions through code. Passionate about building software that makes a difference.
                 </p>
 
                 <!-- Buttons -->
-                <div class="flex justify-center space-x-4 mb-12">
-                    <a href="https://github.com/janbeyatii/" class="button button-filled flex items-center space-x-2">
+                    <div class="flex flex-wrap justify-center gap-4 mb-16">
+                        <a href="https://github.com/janbeyatii/" class="button button-filled group">
                         <span>GitHub</span>
-                        <i data-lucide="github" class="w-5 h-5"></i>
+                            <i data-lucide="github" class="w-5 h-5 group-hover:rotate-12 transition-transform"></i>
                     </a>
-                    <a href="mailto:janbeyati.9@gmail.com" class="button button-outlined flex items-center space-x-2">
+                        <a href="mailto:janbeyati.9@gmail.com" class="button button-outlined group">
                         <span>Contact Me</span>
-                        <i data-lucide="mail" class="w-5 h-5"></i>
-                    </a>
+                            <i data-lucide="mail" class="w-5 h-5 group-hover:scale-110 transition-transform"></i>
+                        </a>
+                        <a href="./assets/Resume.pdf" class="button button-secondary group">
+                            <span>Resume</span>
+                            <i data-lucide="file-text" class="w-5 h-5 group-hover:translate-x-1 transition-transform"></i>
+                        </a>
+                    </div>
                 </div>
             </div>
-            <!-- Add the chevron-down icon -->
+            <!-- Scroll Indicator -->
             <div class="chevron-down">
                 <i data-lucide="chevron-down" class="w-8 h-8"></i>
             </div>
         </section>
 
         <!-- About Me Section -->
-        <section id="about" class="section py-20 bg-slate-700 bg-slate-800">
-            <div class="container mx-auto px-4">
-                <h1 class="text-3xl font-bold mb-8 text-center font-space-mono">About Me</h1>
-                <div class="flex flex-col md:flex-row items-center md:items-start justify-center space-y-8 md:space-y-0 md:space-x-12">
-                    <div class="squircle bg-gray-300 dark:bg-gray-700 flex-shrink-0">
+        <section id="about" class="section py-24 relative">
+            <div class="container mx-auto px-4 max-w-6xl">
+                <div class="text-center mb-16">
+                    <span class="section-label">Get to know me</span>
+                    <h2 class="section-title">About Me</h2>
+                    <div class="section-divider"></div>
+                </div>
+                <div class="flex flex-col lg:flex-row items-center lg:items-start justify-center gap-12 lg:gap-16">
+                    <div class="profile-image-wrapper flex-shrink-0">
+                        <div class="profile-image-border"></div>
+                        <div class="squircle bg-gray-300 dark:bg-gray-700">
                         <img src="assets/dp.jpeg" alt="Jan Beyati" class="w-full h-full object-cover" />
+                        </div>
                     </div>
-                    <div class="max-w-2xl text-center md:text-left">
-                        <p class="about-text font-space-mono">
-                            Hi there! I'm a 4th year Software Engineering student at Carleton University Experienced with the .NET platform using C# as a backend developer with Barracuda Networks, among many other technologies. I have a passion for learning new technologies and building software that can help people. I am also a huge fan of open-source software and I love contributing to the community, always looking for new opportunities to learn and grow as an engineer!
-                        </p>
-                        <br>
-                        <p class="about-text font-space-mono">
+                    <div class="max-w-2xl text-center lg:text-left">
+                        <div class="about-content">
+                            <p class="about-text mb-6">
+                                Hi there! I'm a 4th year Software Engineering student at <span class="text-[#a8ff00] font-semibold">Carleton University</span> with experience in the .NET platform using C# as a backend developer with <span class="text-[#a8ff00] font-semibold">Barracuda Networks</span>, among many other technologies.
+                            </p>
+                            <p class="about-text mb-6">
+                                I have a passion for learning new technologies and building software that can help people. Through my work at <span class="text-[#a8ff00] font-semibold">Beyati Web Solutions</span>, I specialize in creating custom web solutions and helping small businesses scale their online presence. I am also a huge fan of <span class="text-[#a8ff00] font-semibold">open-source software</span> and I love contributing to the community, always looking for new opportunities to learn and grow as an engineer!
+                            </p>
+                            <p class="about-text">
                             Besides that life, you'll catch me tinkering with cars, building legos and playing sports!
                         </p>
-                        <br>
+                        </div>
                     </div>
                 </div>
             </div>
         </section>
 
         <!-- Work and Education Section -->
-        <section id="work-education" class="section py-20">
-            <div class="container mx-auto px-4 max-w-6xl">
-                <h2 class="text-3xl font-bold mb-12 text-center font-space-mono">Work & Education</h2>
-                <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
-
-                    <!-- Work Card -->
-                    <div class="bg-slate-700 bg-slate-800 p-6 rounded-xl shadow-md border border-slate-600 border-slate-600">
-                        <h3 class="text-xl font-bold mb-2">Fullstack Software Engineering Student</h3>
-                        <p class="text-sm text-gray-300 mb-1">Barracuda Networks</p>
-                        <p class="text-sm text-gray-400 mb-3">Sep 2023 – Aug 2024</p>
-                        <p class="mb-4">Worked on .NET backend services, contributed to security products, and wrote automated tests for API features.</p>
-                        <div class="flex flex-wrap gap-2 text-sm">
-                            <span class="bg-blue-600 text-white px-2 py-1 rounded-full">.NET</span>
-                            <span class="bg-purple-600 text-white px-2 py-1 rounded-full">C#</span>
-                            <span class="bg-green-600 text-white px-2 py-1 rounded-full">Backend</span>
-                            <span class="bg-sky-600 text-white px-2 py-1 rounded-full">React</span>
-                            <span class="bg-pink-600 text-white px-2 py-1 rounded-full">Frontend</span>
-                            
+        <section id="work-education" class="section py-24 relative">
+            <div class="container mx-auto px-4 max-w-7xl">
+                <div class="text-center mb-16">
+                    <span class="section-label">My journey</span>
+                    <h2 class="section-title">Work & Education</h2>
+                    <div class="section-divider"></div>
+                </div>
+                <div class="grid grid-cols-1 lg:grid-cols-2 gap-8 max-w-6xl mx-auto">
+                    <!-- Work Card 1 -->
+                    <div class="experience-card group">
+                        <div class="experience-header">
+                            <div class="experience-icon">
+                                <i data-lucide="briefcase" class="w-6 h-6"></i>
+                            </div>
+                            <div>
+                                <h3 class="experience-title">Software Engineering Intern</h3>
+                                <p class="experience-company">Barracuda Networks</p>
+                                <p class="experience-date">Sep 2023 – Aug 2024</p>
+                            </div>
+                        </div>
+                        <p class="experience-description">
+                            Worked on .NET backend services, contributed to security products, and wrote automated tests for API features.
+                        </p>
+                        <div class="experience-tags">
+                            <span class="tech-tag">.NET</span>
+                            <span class="tech-tag">C#</span>
+                            <span class="tech-tag">Backend</span>
+                            <span class="tech-tag">React</span>
+                            <span class="tech-tag">Frontend</span>
                         </div>
                     </div>
 
                     <!-- Education Card -->
-                    <div class="bg-slate-700 bg-slate-800 p-6 rounded-xl shadow-md border border-slate-600 border-slate-600">
-                        <h3 class="text-xl font-bold mb-2">Software Engineering (B.Eng)</h3>
-                        <p class="text-sm text-gray-300 mb-1">Carleton University</p>
-                        <p class="text-sm text-gray-400 mb-3">Sep 2020 – Present</p>
-                        <p class="mb-4">Focused on backend development, systems programming, and engineering fundamentals. Enrolled in co-op program.</p>
-                        <div class="flex flex-wrap gap-2 text-sm">
-                            <span class="bg-yellow-600 text-white px-2 py-1 rounded-full">C</span>
-                            <span class="bg-indigo-600 text-white px-2 py-1 rounded-full">Software Architecture</span>
-                            <span class="bg-teal-600 text-white px-2 py-1 rounded-full">Co-op</span>
-                            
+                    <div class="experience-card group">
+                        <div class="experience-header">
+                            <div class="experience-icon">
+                                <i data-lucide="graduation-cap" class="w-6 h-6"></i>
+                            </div>
+                            <div>
+                                <h3 class="experience-title">Software Engineering (B.Eng)</h3>
+                                <p class="experience-company">Carleton University</p>
+                                <p class="experience-date">Sep 2020 – Present</p>
+                            </div>
+                        </div>
+                        <p class="experience-description">
+                            Focused on backend development, systems programming, and engineering fundamentals. Enrolled in co-op program.
+                        </p>
+                        <div class="experience-tags">
+                            <span class="tech-tag">C</span>
+                            <span class="tech-tag">Software Architecture</span>
+                            <span class="tech-tag">Co-op</span>
                         </div>
                     </div>
 
+                    <!-- Work Card 2 -->
+                    <div class="experience-card group">
+                        <div class="experience-header">
+                            <div class="experience-icon">
+                                <i data-lucide="globe" class="w-6 h-6"></i>
+                            </div>
+                            <div>
+                                <h3 class="experience-title">Owner</h3>
+                                <p class="experience-company">Beyati Web Solutions</p>
+                                <p class="experience-date">Present</p>
+                            </div>
+                        </div>
+                        <p class="experience-description">
+                            Creating an online presence for small businesses through custom web solutions, modern design, and SEO optimization.
+                        </p>
+                        <div class="experience-tags">
+                            <span class="tech-tag">Web Development</span>
+                            <span class="tech-tag">SEO</span>
+                            <span class="tech-tag">Small Business</span>
+                        </div>
+                    </div>
                 </div>
             </div>
         </section>
@@ -114,54 +184,150 @@
 
 
         <!-- Skills Section -->
-        <section id="skills" class="section py-20 bg-slate-700 bg-slate-800">
-            <div class="container mx-auto px-8 sm:px-16">
-                <h2 class="text-3xl font-bold mb-16 text-center font-space-mono">Experience With</h2>
-                <div class="grid grid-cols-3 sm:grid-cols-4 lg:grid-cols-6 gap-12 place-items-center">
-                    <img src="https://cdn.jsdelivr.net/npm/simple-icons@v13/icons/c.svg" alt="C" class="tech-icon">
-                <img src="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIxMjgiIGhlaWdodD0iMTI4IiB2aWV3Qm94PSIwIDAgMTI4IDEyOCI+PHBhdGggZmlsbD0iY3VycmVudENvbG9yIiBkPSJtMTE3LjUgMzMuNWwuMy0uMmMtLjYtMS4xLTEuNS0yLjEtMi40LTIuNkw2Ny4xIDIuOWMtLjgtLjUtMS45LS43LTMuMS0uN3MtMi4zLjMtMy4xLjdsLTQ4IDI3LjljLTEuNyAxLTIuOSAzLjUtMi45IDUuNHY1NS43YzAgMS4xLjIgMi4zLjkgMy40bC0uMi4xYy41LjggMS4yIDEuNSAxLjkgMS45bDQ4LjIgMjcuOWMuOC41IDEuOS43IDMuMS43czIuMy0uMyAzLjEtLjdsNDgtMjcuOWMxLjctMSAyLjktMy41IDIuOS01LjRWMzYuMWMuMS0uOCAwLTEuNy0uNC0yLjZtLTUzLjUgNzBjLTIxLjggMC0zOS41LTE3LjctMzkuNS0zOS41UzQyLjIgMjQuNSA2NCAyNC41YzE0LjcgMCAyNy41IDguMSAzNC4zIDIwbC0xMyA3LjVDODEuMSA0NC41IDczLjEgMzkuNSA2NCAzOS41Yy0xMy41IDAtMjQuNSAxMS0yNC41IDI0LjVzMTEgMjQuNSAyNC41IDI0LjVjOS4xIDAgMTcuMS01IDIxLjMtMTIuNGwxMi45IDcuNmMtNi44IDExLjgtMTkuNiAxOS44LTM0LjIgMTkuOE0xMTUgNjJoLTMuMmwtLjkgNGg0LjF2NWgtNWwtMS4yIDZoLTQuOWwxLjItNmgtMy44bC0xLjIgNmgtNC44bDEuMi02SDk0di01aDMuNWwuOS00SDk0di01aDUuM2wxLjItNmg0LjlsLTEuMiA2aDMuOGwxLjItNmg0LjhsLTEuMiA2aDIuMnptLTEyLjcgNGgzLjhsLjktNGgtMy44eiIvPjwvc3ZnPg==" alt="Java" class="tech-icon">
-                    <img src="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIyNCIgaGVpZ2h0PSIyNCIgdmlld0JveD0iMCAwIDI0IDI0Ij48ZyBmaWxsPSJub25lIiBzdHJva2U9ImN1cnJlbnRDb2xvciIgc3Ryb2tlLWxpbmVjYXA9InJvdW5kIiBzdHJva2UtbGluZWpvaW49InJvdW5kIiBzdHJva2Utd2lkdGg9IjEuNSIgY29sb3I9ImN1cnJlbnRDb2xvciI+PHBhdGggZD0iTTYuMTc1IDEwLjMzM2MtMS4yMDguNDA4LTEuOTU1Ljk3LTEuOTU1IDEuNTkzYzAgLjg0OCAxLjM4OSAxLjU4NyAzLjQ0IDEuOTdtMCAwYy0uNzYyLjM4Ni0xLjIxNy44NzUtMS4yMTcgMS40MDhjMCAxLjI0MyAyLjQ4NyAyLjI1MSA1LjU1NSAyLjI1MWExMyAxMyAwIDAgMCAyLjIyMy0uMTg3bS02LjU2LTMuNDcxYTE4IDE4IDAgMCAwIDMuMjI2LjI4YzEuNzA4IDAgMy4yNjUtLjIxNiA0LjQ0NS0uNTczbTEuMTEtMy40OGMtMS40MTEuNDE3LTMuMzc5LjY3Ni01LjU1NS42NzZjLTQuMjk1IDAtNy43NzgtMS4wMDgtNy43NzgtMi4yNTJjMC0uOTYgMi4wNzctMS43OCA1LTIuMTA0Ii8+PHBhdGggZD0iTTIyIDE5LjA3QzIyIDIwLjY4OCAxNy41MjMgMjIgMTIgMjJTMiAyMC42ODggMiAxOS4wN2MwLTEuMTUgMS43MDctMi4xNDYgNS0yLjYyNm0xMS43Ni03LjY1NmM0LjIxNC0xLjA5NCA0LjgxNiA1LjQ2OC0xLjIwNSA3LjY1Nk0xNy41NTggMmMtLjc0LjEyMy0yLjEzMy44MTUtMS43NzggMi41OTNjLjM1NiAxLjc3Ny0uMTQ4IDIuNzE2LS40NDQgMi45NjNNMTMuMTEzIDJjLS43NDEuMTQ4LTIuMTM0Ljk3OC0xLjc3OCAzLjExMXMtLjE0OCAyLjcwNC0uNDQ0IDMiLz48L2c+PC9zdmc+" alt="Java" class="tech-icon">
-                    <img src="https://cdn.jsdelivr.net/npm/simple-icons@v13/icons/linux.svg" alt="Linux" class="tech-icon">
-                    <img src="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIyNTYiIGhlaWdodD0iMjU2IiB2aWV3Qm94PSIwIDAgMjU2IDI1NiI+PGcgZmlsbD0iY3VycmVudENvbG9yIj48cGF0aCBkPSJNMjA4IDg4aC01NlYzMloiIG9wYWNpdHk9IjAuMiIvPjxwYXRoIGQ9Ik00OCAxMjBhOCA4IDAgMCAwIDgtOFY0MGg4OHY0OGE4IDggMCAwIDAgOCA4aDQ4djE2YTggOCAwIDAgMCAxNiAwVjg4YTggOCAwIDAgMC0yLjM0LTUuNjZsLTU2LTU2QTggOCAwIDAgMCAxNTIgMjRINTZhMTYgMTYgMCAwIDAtMTYgMTZ2NzJhOCA4IDAgMCAwIDggOG0xMTItNjguNjlMMTg4LjY5IDgwSDE2MFpNMjI4IDIwOGE4IDggMCAwIDEtOCA4aC0yOGE4IDggMCAwIDEtOC04di01NmE4IDggMCAwIDEgMTYgMHY0OGgyMGE4IDggMCAwIDEgOCA4TTkxLjgyIDE5Ni4zMWEyMC44MiAyMC44MiAwIDAgMS05LjE5IDE1LjIzQzc3LjQ0IDIxNSA3MSAyMTYgNjUuMTQgMjE2QTYwLjcgNjAuNyAwIDAgMSA1MCAyMTRhOCA4IDAgMCAxIDQuMy0xNS40MWM0LjM4IDEuMiAxNC45NSAyLjcgMTkuNTUtLjM2Yy44OS0uNTkgMS44My0xLjUyIDIuMTQtMy45M2MuMzUtMi42Ny0uNzEtNC4xLTEyLjc4LTcuNTljLTkuMzUtMi43LTI1LTcuMjMtMjMtMjMuMTFhMjAuNTUgMjAuNTUgMCAwIDEgOS0xNC45NWMxMS44NC04IDMwLjcyLTMuMzEgMzIuODMtMi43NmE4IDggMCAwIDEtNC4wOCAxNS40OGMtNC40OS0xLjE3LTE1LjIyLTIuNTYtMTkuODIuNTZhNC41NCA0LjU0IDAgMCAwLTIgMy42N2MtLjEyLjktLjE0IDEuMDggMS4xMiAxLjljMi4zMSAxLjQ5IDYuNDQgMi42OCAxMC40NSAzLjg0YzkuNzkgMi44MyAyNi4zNSA3LjY2IDI0LjExIDI0Ljk3bTcxIDMuMjNBMzkuMDUgMzkuMDUgMCAwIDAgMTY4IDE4MGMwLTE5Ljg1LTE0LjM1LTM2LTMyLTM2cy0zMiAxNi4xNS0zMiAzNnMxNC4zNSAzNiAzMiAzNmEyOS4yIDI5LjIgMCAwIDAgMTUuOS00Ljc4bDIuNDQgMi40NGE4IDggMCAwIDAgMTEuMzEtMTEuMzJaTTEzNiAyMDBjLTguODIgMC0xNi05LTE2LTIwczcuMTgtMjAgMTYtMjBzMTYgOSAxNiAyMGEyNC40IDI0LjQgMCAwIDEtMS4xOCA3LjUxbC0xLjE3LTEuMTdhOCA4IDAgMSAwLTExLjMxIDExLjMybDEuNjggMS42N2ExMyAxMyAwIDAgMS00LjAyLjY3Ii8+PC9nPjwvc3ZnPg==" alt="SQL" class="tech-icon">
-                    <img src="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIyNCIgaGVpZ2h0PSIyNCIgdmlld0JveD0iMCAwIDI0IDI0Ij48cGF0aCBmaWxsPSJjdXJyZW50Q29sb3IiIGQ9Ik0xMiAyQTEwIDEwIDAgMCAwIDIgMTJjMCA0LjQyIDIuODcgOC4xNyA2Ljg0IDkuNWMuNS4wOC42Ni0uMjMuNjYtLjV2LTEuNjljLTIuNzcuNi0zLjM2LTEuMzQtMy4zNi0xLjM0Yy0uNDYtMS4xNi0xLjExLTEuNDctMS4xMS0xLjQ3Yy0uOTEtLjYyLjA3LS42LjA3LS42YzEgLjA3IDEuNTMgMS4wMyAxLjUzIDEuMDNjLjg3IDEuNTIgMi4zNCAxLjA3IDIuOTEuODNjLjA5LS42NS4zNS0xLjA5LjYzLTEuMzRjLTIuMjItLjI1LTQuNTUtMS4xMS00LjU1LTQuOTJjMC0xLjExLjM4LTIgMS4wMy0yLjcxYy0uMS0uMjUtLjQ1LTEuMjkuMS0yLjY0YzAgMCAuODQtLjI3IDIuNzUgMS4wMmMuNzktLjIyIDEuNjUtLjMzIDIuNS0uMzNzMS43MS4xMSAyLjUuMzNjMS45MS0xLjI5IDIuNzUtMS4wMiAyLjc1LTEuMDJjLjU1IDEuMzUuMiAyLjM5LjEgMi42NGMuNjUuNzEgMS4wMyAxLjYgMS4wMyAyLjcxYzAgMy44Mi0yLjM0IDQuNjYtNC41NyA0LjkxYy4zNi4zMS42OS45Mi42OSAxLjg1VjIxYzAgLjI3LjE2LjU5LjY3LjVDMTkuMTQgMjAuMTYgMjIgMTYuNDIgMjIgMTJBMTAgMTAgMCAwIDAgMTIgMiIvPjwvc3ZnPg==" alt="github" class="tech-icon">
-
+        <section id="skills" class="section py-24 relative">
+            <div class="container mx-auto px-4 max-w-7xl">
+                <div class="text-center mb-16">
+                    <span class="section-label">Technologies I work with</span>
+                    <h2 class="section-title">Experience With</h2>
+                    <div class="section-divider"></div>
+                </div>
+                
+                <!-- Scrolling Skills Banner Row 1 (Left to Right) -->
+                <div class="skills-banner-wrapper">
+                    <div class="skills-banner skills-banner-reverse">
+                        <!-- Programming Languages -->
+                        <div class="skill-badge">Java</div>
+                        <div class="skill-badge">Python</div>
+                        <div class="skill-badge">JavaScript</div>
+                        <div class="skill-badge">C/C++</div>
+                        <div class="skill-badge">C#</div>
+                        <div class="skill-badge">SQL</div>
+                        <div class="skill-badge">YAML</div>
+                        
+                        <!-- Frameworks -->
+                        <div class="skill-badge">React</div>
+                        <div class="skill-badge">Selenium</div>
+                        <div class="skill-badge">Spring Boot</div>
+                        <div class="skill-badge">PyTorch</div>
+                        
+                        <!-- Software -->
+                        <div class="skill-badge">Git</div>
+                        <div class="skill-badge">JIRA</div>
+                        <div class="skill-badge">Azure</div>
+                        <div class="skill-badge">Supabase</div>
+                        
+                        <!-- Duplicate for seamless loop -->
+                        <div class="skill-badge">Java</div>
+                        <div class="skill-badge">Python</div>
+                        <div class="skill-badge">JavaScript</div>
+                        <div class="skill-badge">C/C++</div>
+                        <div class="skill-badge">C#</div>
+                        <div class="skill-badge">SQL</div>
+                        <div class="skill-badge">YAML</div>
+                        <div class="skill-badge">React</div>
+                        <div class="skill-badge">Selenium</div>
+                        <div class="skill-badge">Spring Boot</div>
+                        <div class="skill-badge">PyTorch</div>
+                        <div class="skill-badge">Git</div>
+                        <div class="skill-badge">JIRA</div>
+                        <div class="skill-badge">Azure</div>
+                        <div class="skill-badge">Supabase</div>
+                    </div>
+                </div>
+                
+                <!-- Scrolling Skills Banner Row 2 (Right to Left) -->
+                <div class="skills-banner-wrapper mt-6">
+                    <div class="skills-banner">
+                        <!-- Networking -->
+                        <div class="skill-badge">HTTP/HTTPS</div>
+                        <div class="skill-badge">TCP/IP</div>
+                        <div class="skill-badge">OpenSSL</div>
+                        <div class="skill-badge">gRPC</div>
+                        <div class="skill-badge">OAuth</div>
+                        
+                        <!-- Operating Systems -->
+                        <div class="skill-badge">Linux</div>
+                        <div class="skill-badge">Windows</div>
+                        <div class="skill-badge">macOS</div>
+                        
+                        <!-- DevOps -->
+                        <div class="skill-badge">Docker</div>
+                        <div class="skill-badge">AWS</div>
+                        <div class="skill-badge">Azure DevOps</div>
+                        
+                        <!-- APIs -->
+                        <div class="skill-badge">GraphQL</div>
+                        <div class="skill-badge">REST</div>
+                        <div class="skill-badge">WebSockets</div>
+                        
+                        <!-- Duplicate for seamless loop -->
+                        <div class="skill-badge">HTTP/HTTPS</div>
+                        <div class="skill-badge">TCP/IP</div>
+                        <div class="skill-badge">OpenSSL</div>
+                        <div class="skill-badge">gRPC</div>
+                        <div class="skill-badge">OAuth</div>
+                        <div class="skill-badge">Linux</div>
+                        <div class="skill-badge">Windows</div>
+                        <div class="skill-badge">macOS</div>
+                        <div class="skill-badge">Docker</div>
+                        <div class="skill-badge">AWS</div>
+                        <div class="skill-badge">Azure DevOps</div>
+                        <div class="skill-badge">GraphQL</div>
+                        <div class="skill-badge">REST</div>
+                        <div class="skill-badge">WebSockets</div>
+                    </div>
                 </div>
             </div>
         </section>
 
         <!-- Projects Section -->
-        <section id="projects" class="section py-16">
+        <section id="projects" class="section py-24 relative">
             <div class="container mx-auto px-4 max-w-6xl projects-container">
-                <h2 class="text-3xl font-bold mb-12 text-center font-space-mono">Projects</h2>
+                <div class="text-center mb-16">
+                    <span class="section-label">What I've built</span>
+                    <h2 class="section-title">Projects</h2>
+                    <div class="section-divider"></div>
+                </div>
                 <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
                     <!-- Project tiles will be dynamically inserted here -->
                 </div>
             </div>
-            <br> 
-            <br>
+        </section>
+
+        <!-- Footer Section -->
+        <footer class="py-16 border-t border-slate-700/50">
+            <div class="container mx-auto px-4 max-w-6xl">
+                <div class="text-center mb-12">
+                    <h3 class="text-2xl font-bold mb-4">Let's Connect</h3>
+                    <p class="text-gray-400 mb-8">Feel free to reach out for collaborations or just a friendly chat!</p>
             <nav class="nav-container">
-                <a href="https://github.com/janbeyatii" class="nav-link text-xl md:text-2xl text-gray-300 font-bold">
-                    <i data-lucide="github" class="w-6 h-6"></i>
-                    Github
-                </a>
-                <a href="./assets/Resume.pdf" class="nav-link text-xl md:text-2xl text-gray-300 font-bold">
-                    <i data-lucide="file-text" class="w-6 h-6"></i>
-                    Resume
-                </a>
-                <a href="https://www.linkedin.com/in/jan-b-970775213/" class="nav-link text-xl md:text-2xl text-gray-300 font-bold">
-                    <i data-lucide="linkedin" class="w-6 h-6"></i>
-                    LinkedIn
-                </a>
-                <a href="https://instagram.com/beyattii" class="nav-link text-xl md:text-2xl text-gray-300 font-bold">
-                    <i data-lucide="instagram" class="w-6 h-6"></i>
-                    Instagram
-                </a>
-                <a href="mailto:janbeyati.9@gmail.com" class="nav-link text-xl md:text-2xl text-gray-300 font-bold">
-                    <i data-lucide="mail" class="w-6 h-6"></i>
-                    Contact
+                        <a href="https://github.com/janbeyatii" class="nav-link group">
+                            <i data-lucide="github" class="w-6 h-6 group-hover:rotate-12 transition-transform"></i>
+                            <span>Github</span>
+                        </a>
+                        <a href="./assets/Resume.pdf" class="nav-link group">
+                            <i data-lucide="file-text" class="w-6 h-6 group-hover:translate-x-1 transition-transform"></i>
+                            <span>Resume</span>
+                        </a>
+                        <a href="https://www.linkedin.com/in/jan-b-970775213/" class="nav-link group">
+                            <i data-lucide="linkedin" class="w-6 h-6 group-hover:scale-110 transition-transform"></i>
+                            <span>LinkedIn</span>
+                        </a>
+                        <a href="https://instagram.com/beyattii" class="nav-link group">
+                            <i data-lucide="instagram" class="w-6 h-6 group-hover:rotate-12 transition-transform"></i>
+                            <span>Instagram</span>
+                        </a>
+                        <a href="mailto:janbeyati.9@gmail.com" class="nav-link group">
+                            <i data-lucide="mail" class="w-6 h-6 group-hover:scale-110 transition-transform"></i>
+                            <span>Contact</span>
                 </a>
             </nav>
-        </section>
+                </div>
+                <div class="text-center text-gray-500 text-sm">
+                    <p>© <span id="currentYear"></span> Jan Beyati. All rights reserved.</p>
+                </div>
+            </div>
+        </footer>
 
 
     </main>
